@@ -1,0 +1,21 @@
+# ---------------------------------------------
+# Cross-Site Scripting (XSS) Detection Rules
+# Target: DVWA - Reflected XSS - Low Security Level
+# Priority: Critical first â€” then General.
+# ---------------------------------------------
+
+# URL-Encoded Payload Variants â€” Critical First
+
+# Critical: Attempt to Steal Cookies (Encoded)
+alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] XSS Terdeteksi â€” Pencurian document.cookie"; priority:1; content:"%3Cscript%3Ealert%28document.cookie%29%3B%3C%2Fscript%3E"; nocase; flowbits:set,xss_cookie_theft; sid:1000013; rev:7;)
+
+# General: Any <script> injection attempt (Encoded)
+alert tcp any any -> 192.168.56.1 80 (msg:"[WARNING] Percobaan XSS Terdeteksi â€” Injeksi <script>"; priority:2; content:"%3Cscript%3E"; nocase; sid:1000012; rev:7;)
+
+# Pattern-based Generic Detection â€” Critical First
+
+# Critical Pattern: Cookie Theft attempt (Encoded or Raw)
+alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] Pola XSS Terdeteksi â€” Pencurian document.cookie"; priority:1; pcre:"/document\.cookie/i"; flowbits:set,xss_cookie_theft; sid:1000015; rev:7;)
+
+# General Pattern: Any <script> block
+alert tcp any any -> 192.168.56.1 80 (msg:"[WARNING] Pola XSS Terdeteksi â€” Blok <script> Generik Terdeteksi"; priority:2; pcre:"/<script>/i"; sid:1000014; rev:7;)

@@ -1,0 +1,5 @@
+#Normal Command Injections
+alert http any any -> 192.168.56.1 any (msg:"[WARNING] Command Injection Terdeteksi â€” Melalui Parameter IP General "; priority:2; http.request_body; content:"ip="; nocase; fast_pattern; pcre:"/ip=[^&\\n]{0,100}(\&|\%26)(\+|\s)*(dir|whoami|powershell)\b/i"; sid:2100300; rev:1;)
+
+#Reverse Shell 
+alert http any any -> 192.168.56.1 any (msg:"[CRITICAL] Serangan Powershell Reverse Shell Terjadi & Terdeteksi"; priority:1; http.request_body; pcre:"/powershell(\+|%20|\s)*\-NoP(\+|%20|\s)*\-NonI(\+|%20|\s)*\-W(\+|%20|\s)*Hidden(\+|%20|\s)*\-Exec(\+|%20|\s)*Bypass/i"; sid:2100301; rev:2;)
