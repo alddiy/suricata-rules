@@ -5,5 +5,5 @@
 # ---------------------------------------------
 
 # URL-Encoded Payload Variants (Encoded Matches)
-alert tcp any any -> 192.168.56.1 80 (msg:"[WARNING] Percobaan SQL Injection â€” 1' OR '1' = '1"; priority:2; content:"1%27+OR+%271%27+%3D+%271"; nocase; sid:1000003; rev:1;)
-alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] SQL Injection UNION SELECT Terdeteksi â€” Potensi Kebocoran Kredensial"; priority:1; content:"%27+UNION+SELECT+USER%2C+PASSWORD+FROM+users%23"; nocase; sid:1000004; rev:1;)
+alert tcp any any -> 192.168.56.1 80 (msg:"[WARNING] Percobaan SQL Injection: 1' OR '1' = '1"; priority:2; content:"1%27+OR+%271%27+%3D+%271"; nocase; sid:1000003; rev:1;)
+alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] SQL Injection UNION SELECT Terdeteksi: Potensi Kebocoran Kredensial"; priority:1; content:"%27+UNION+SELECT+USER%2C+PASSWORD+FROM+users%23"; nocase; sid:1000004; rev:1;)
