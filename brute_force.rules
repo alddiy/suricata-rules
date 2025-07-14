@@ -5,7 +5,7 @@
 # ---------------------------------------------
 
 # Brute Force Detection: 4 or more login attempts within 2 seconds from same source IP
-alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] Serangan Brute Force Terdeteksi â€” Percobaan Login Abnormal"; priority:1; content:"/DVWA/vulnerabilities/brute/?username="; http_uri; content:"&password="; http_uri; detection_filter:track by_src, count 4, seconds 2; sid:1000102; rev:3;)
+alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] Serangan Brute Force Terdeteksi: Percobaan Login Abnormal"; priority:1; content:"/DVWA/vulnerabilities/brute/?username="; http_uri; content:"&password="; http_uri; detection_filter:track by_src, count 4, seconds 2; sid:1000102; rev:3;)
 
 # URL-Encoded Brute Force Detection: 4 or more login attempts within 2 seconds
-alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] Serangan Brute Force URL-Encoded Terdeteksi â€” Percobaan Login Abnormal"; priority:1; content:"username%3D"; http_uri; content:"%26password%3D"; http_uri; detection_filter:track by_src, count 4, seconds 2; sid:1000104; rev:3;)
+alert tcp any any -> 192.168.56.1 80 (msg:"[CRITICAL] Serangan Brute Force URL-Encoded Terdeteksi: Percobaan Login Abnormal"; priority:1; content:"username%3D"; http_uri; content:"%26password%3D"; http_uri; detection_filter:track by_src, count 4, seconds 2; sid:1000104; rev:3;)
